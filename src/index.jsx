@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {
   BrowserRouter as Router,
   Route,
-  // useHistory,
+  //useHistory,
   Switch,
 } from 'react-router-dom';
 
@@ -14,7 +14,7 @@ import { LandingPage } from './components/pages/Landing';
 import { FooterContent, SubFooter } from './components/Layout/Footer';
 import { HeaderContent } from './components/Layout/Header';
 
-// import { TablePage } from './components/pages/Table';
+//import { TablePage } from './components/pages/Table';
 
 import { Layout } from 'antd';
 import GraphsContainer from './components/pages/DataVisualizations/GraphsContainer';

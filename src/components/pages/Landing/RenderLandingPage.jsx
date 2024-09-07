@@ -66,14 +66,42 @@ function RenderLandingPage(props) {
           </h3>
         </div>
       </div>
-      <div>
+      {/* <div> */}
         {/* Bottom Section: Add code here for the graphs section for your first ticket */}
-        {/* <div className="bottom-section">*/}
+        { <div className="bottom-section">
+          <h1>Systemic Disparity Insights</h1>
+          <div className='data-container'>
+            <div className='first-data-point-container'>
+              <h2></h2>
+              <h3></h3>
+            </div>
+            <div className='second-data-point-container'>
+            <h2></h2>
+             <h3></h3>
+            </div>
+            <div className='third-data-point-container'>
+            <h2></h2>
+              <h3></h3>
+            </div>
+          </div>
+          <div className='read-more-btn'>
+          <a href="" target='_blank' rel='noreferer'>
+          <Button
+          type="default"
+          style={{ backgroundColor: '#404C4A', color: '#FFFFFF' }}
+          onClick={() => window.location.href='https://humanrightsfirst.org/library/uscis-records-reveal-systemic-disparities-in-asylum-decisions/'}
+        >
+          Read More
+        </Button>
+        </a>
+        </div>
         <p onClick={() => scrollToTop()} className="back-to-top">
           Back To Top ^
         </p>
       </div>
+}
     </div>
+  
   );
 }
 export default RenderLandingPage;
