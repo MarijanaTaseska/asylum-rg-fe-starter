@@ -85,16 +85,18 @@ function RenderLandingPage(props) {
             </div>
           </div>
           <div className='read-more-btn'>
-          <a href="" target='_blank' rel='noreferer'>
-          <Button
-          type="default"
-          style={{ backgroundColor: '#404C4A', color: '#FFFFFF' }}
-          onClick={() => window.location.href='https://humanrightsfirst.org/library/uscis-records-reveal-systemic-disparities-in-asylum-decisions/'}
-        >
-          Read More
-        </Button>
-        </a>
-        </div>
+  <a 
+    href="https://humanrightsfirst.org/library/uscis-records-reveal-systemic-disparities-in-asylum-decisions/" 
+    target='_blank' 
+    rel='noopener noreferrer'>
+    <Button
+      type="default"
+      style={{ backgroundColor: '#404C4A', color: '#FFFFFF' }}
+    >
+      Read More
+    </Button>
+  </a>
+</div>
         <p onClick={() => scrollToTop()} className="back-to-top">
           Back To Top ^
         </p>
