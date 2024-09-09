@@ -33,7 +33,7 @@ function RenderLandingPage(props) {
 
       {/* Graphs Section: Add code here for the graphs section for your first ticket */}
       { <div className="graphs-section">
-
+        
         <div className='grant-rates-by-office-graph-container'>
         <img src={GrantRatesByOfficeImg} alt="Search Grant Rates By Office"
         className='gr-office-img '/>
@@ -61,6 +61,8 @@ function RenderLandingPage(props) {
         </Button>
         
       <div className='read-more-btn'>
+
+        {/* download without opening a new tab or reloading */}
     <Button
       type="default"
       style={{ backgroundColor: '#404C4A', color: '#FFFFFF' }}
