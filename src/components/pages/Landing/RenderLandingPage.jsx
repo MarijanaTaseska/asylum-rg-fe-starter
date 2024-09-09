@@ -59,19 +59,24 @@ function RenderLandingPage(props) {
         >
           View the Data
         </Button>
-        <a 
-    href="https://humanrightsfirst.org/wp-content/uploads/2022/10/COW2021001887-I589Data.csv" 
-    target='_blank' 
-    rel='noopener noreferrer'>
+        
       <div className='read-more-btn'>
     <Button
       type="default"
       style={{ backgroundColor: '#404C4A', color: '#FFFFFF' }}
+      onClick={() => {
+        const link = document.createElement('a');
+        link.href = 'https://humanrightsfirst.org/wp-content/uploads/2022/10/COW2021001887-I589Data.csv';
+        link.setAttribute('download', 'COW2021001887-I589Data.csv');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }}
     >
       Download the Data
     </Button>
     </div>
-  </a>
+  
       </div>
 
       <div className="middle-section">
