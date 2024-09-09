@@ -33,7 +33,7 @@ function RenderLandingPage(props) {
 
       {/* Graphs Section: Add code here for the graphs section for your first ticket */}
       { <div className="graphs-section">
-        
+
         <div className='grant-rates-by-office-graph-container'>
         <img src={GrantRatesByOfficeImg} alt="Search Grant Rates By Office"
         className='gr-office-img '/>
@@ -59,6 +59,19 @@ function RenderLandingPage(props) {
         >
           View the Data
         </Button>
+        <a 
+    href="https://humanrightsfirst.org/wp-content/uploads/2022/10/COW2021001887-I589Data.csv" 
+    target='_blank' 
+    rel='noopener noreferrer'>
+      <div className='read-more-btn'>
+    <Button
+      type="default"
+      style={{ backgroundColor: '#404C4A', color: '#FFFFFF' }}
+    >
+      Download the Data
+    </Button>
+    </div>
+  </a>
       </div>
 
       <div className="middle-section">
