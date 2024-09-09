@@ -37,6 +37,7 @@ function TableRow(props) {
             );
           }
         }
+        //return null; // added retun null,in case function doesnt return anything
       })}
     </div>
   );
