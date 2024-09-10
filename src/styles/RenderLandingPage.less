@@ -117,11 +117,11 @@
     text-align: center;
     margin-top: 10%;
     box-sizing: border-box;
-}
-.bottom-section h1{
-    font-size: 3.5rem;
+    h1{
+        font-size: 3.5rem;
     font-family: moneta;
     margin-bottom: 10%;
+    }
 }
 .data-container{
     display: flex;
@@ -129,39 +129,45 @@
     margin-bottom: 5%;
     align-items: stretch;
     flex-wrap: wrap;
-    
+    div{
+        flex: 1 1 30%; /* 30% of the container width, flexible */
+        margin: 5px; /* space between the divs */
+        min-width: 200px; /* Minimum width */
+        box-sizing: border-box; /* padding and borders are included in the width */
+        background-color: #f0f0f0; /* background color */
+        padding: 15px; /* Example padding for content */
+    }
 }
-.data-container div{
-    flex: 1 1 30%; /* 30% of the container width, flexible */
-    margin: 5px; /* space between the divs */
-    min-width: 200px; /* Minimum width */
-    box-sizing: border-box; /* padding and borders are included in the width */
-    background-color: #f0f0f0; /* background color */
-    padding: 15px; /* Example padding for content */
-}
-.first-data-point-container h2{
+.first-data-point-container {
+   h2{
     font-family: moneta;
     font-size: 3rem;
-}
-.first-data-point-container h3{
+   } 
+   h3{
     font-family: acumin;
     font-size: 1.2rem;
+   }
 }
-.second-data-point-container h2{
-    font-family: beatrice-regular;
-    font-size: 3rem;
+.second-data-point-container {
+    h2{
+     font-family: beatrice-regular;
+     font-size: 3rem;
+    }
+    h3{
+        font-family: acumin;
+        font-size: 1.2rem;
+    }
 }
-.second-data-point-container h3{
+
+.third-data-point-container {
+    h2{
+        font-family: beatrice;
+        font-size: 3rem;
+    }
+   h3{
     font-family: acumin;
     font-size: 1.2rem;
-}
-.third-data-point-container h2{
-    font-family: beatrice;
-    font-size: 3rem;
-}
-.third-data-point-container h3{
-    font-family: acumin;
-    font-size: 1.2rem;
+   }
 }
 .back-to-top {
     width: 8%;
