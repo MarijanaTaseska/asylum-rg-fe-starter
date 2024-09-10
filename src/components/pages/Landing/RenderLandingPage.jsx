@@ -31,7 +31,7 @@ function RenderLandingPage(props) {
         </div>
       </div>
 
-      {/* Graphs Section: Add code here for the graphs section for your first ticket */}
+      {/* Graphs Section:*/}
       { <div className="graphs-section">
         
         <div className='grant-rates-by-office-graph-container'>
@@ -78,7 +78,6 @@ function RenderLandingPage(props) {
       Download the Data
     </Button>
     </div>
-  
       </div>
 
       <div className="middle-section">
@@ -97,8 +96,7 @@ function RenderLandingPage(props) {
           </h3>
         </div>
       </div>
-      {/* <div> */}
-        {/* Bottom Section: Add code here for the graphs section for your first ticket */}
+        {/* Bottom Section: */}
         { <div className="bottom-section">
           <h1>Systemic Disparity Insights</h1>
           <div className='data-container'>
