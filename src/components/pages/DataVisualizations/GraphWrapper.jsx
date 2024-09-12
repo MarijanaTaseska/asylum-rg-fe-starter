@@ -10,7 +10,7 @@ import YearLimitsSelect from './YearLimitsSelect';
 import ViewSelect from './ViewSelect';
 import axios from 'axios';
 import { resetVisualizationQuery } from '../../../state/actionCreators';
-import test_data from '../../../data/test_data.json';
+//import test_data from '../../../data/test_data.json';
 import { colors } from '../../../styles/data_vis_colors';
 import ScrollToTopOnMount from '../../../utils/scrollToTopOnMount';
 
@@ -72,40 +72,33 @@ function GraphWrapper(props) {
                                    -- Mack 
     
     */
+  const fiscalSummaryUrl = `${process.env.REACT_APP_API_URI}/fiscalSummary`;
+  const citizenshipSummaryUrl = `${process.env.REACT_APP_API_URI}/citizenshipSummary`;
+   const params ={
+    from: years[0],
+      to: years[1],
+      };
+ if (office && office !== 'all') {
+  params.office = office;
+}
+axios.all([
+  axios.get(fiscalSummaryUrl, { params }), // Fetch fiscal summary data
+  axios.get(citizenshipSummaryUrl, { params }) // Fetch citizenship summary data
+])
+.then(axios.spread((fiscalResponse, citizenshipResponse) => {
+  const fiscalData = fiscalResponse.data;
+  const citizenshipData = citizenshipResponse.data;
 
-    if (office === 'all' || !office) {
-      axios
-        .get(process.env.REACT_APP_API_URI, {
-          // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
-          params: {
-            from: years[0],
-            to: years[1],
-          },
-        })
-        .then(result => {
-          stateSettingCallback(view, office, test_data); // <-- `test_data` here can be simply replaced by `result.data` in prod!
-        })
-        .catch(err => {
-          console.error(err);
-        });
-    } else {
-      axios
-        .get(process.env.REACT_APP_API_URI, {
-          // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
-          params: {
-            from: years[0],
-            to: years[1],
-            office: office,
-          },
-        })
-        .then(result => {
-          stateSettingCallback(view, office, test_data); // <-- `test_data` here can be simply replaced by `result.data` in prod!
-        })
-        .catch(err => {
-          console.error(err);
-        });
-    }
+  // Convert yearResults to array if it exists
+  if (fiscalData && fiscalData.yearResults) {
+    fiscalData.yearResults = Object.values(fiscalData.yearResults);
   }
+  stateSettingCallback(view, office, [fiscalData, citizenshipData]);
+}))
+.catch(err => {
+  console.error('Error fetching data:', err);
+});
+}
   const clearQuery = (view, office) => {
     dispatch(resetVisualizationQuery(view, office));
   };
@@ -143,5 +136,45 @@ function GraphWrapper(props) {
     </div>
   );
 }
+
+// function moldData(fiscalData, citizenshipData) {
+//   // Modify this function according to how the data from both endpoints needs to be combined
+//   return {
+//     fiscalSummary: transformFiscalYearData(fiscalData),
+//     citizenshipSummary: transformCitizenshipData(citizenshipData),
+//   };
+// }
+// function transformFiscalYearData(apiData) {
+//   if (!apiData || !apiData.yearResults) {
+//     console.error("Fiscal year data is missing 'yearResults'");
+//     return [];
+//   }
+//   return apiData.yearResults.map(year => ({
+//     fiscal_year: year.fiscal_year,
+//     granted: year.granted,
+//     totalGranted: year.totalGranted,
+//     denied: year.denied,
+//     adminClosed: year.adminClosed,
+//     totalCases: year.totalCases,
+//     yearData: year.yearData.map(office => ({
+//       office: office.office,
+//       granted: office.granted,
+//       totalGranted: office.totalGranted,
+//       denied: office.denied,
+//       adminClosed: office.adminClosed,
+//       totalCases: office.totalCases
+//     }))
+//   }));
+// }
+// function transformCitizenshipData(apiData) {
+//   return apiData.map(country => ({
+//     citizenship: country.citizenship,
+//     granted: country.granted,
+//     totalGranted: country.totalGranted,
+//     denied: country.denied,
+//     adminClosed: country.adminClosed,
+//     totalCases: country.totalCases
+//   }));
+// }
 
 export default connect()(GraphWrapper);
