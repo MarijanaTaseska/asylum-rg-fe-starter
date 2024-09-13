@@ -12,13 +12,17 @@ const rawApiDataToPlotlyReadyInfo = (view, office, data) => {
     'Miami, FL',
     'New Orleans, LA',
   ];
+  console.log(
+  'rawAPIDataConponent here is view:',view,
+  'here is office:',office,
+  'here is data:',data,
+  );
   let rowItem;
   let rowsForTable;
   let yearMinMax = []; //variable to set minYear and MaxYear
   for (let yearResults of data[0]['yearResults']) {
     yearMinMax.push(yearResults['fiscal_year']);
   }
-console.log('in component',data);
   const yearByOfficeByGrant = {}; //Object that contacts year by Office by grant rate information
   for (let office of data[0]['yearResults']) {
     if (!yearByOfficeByGrant[office['fiscal_year']])

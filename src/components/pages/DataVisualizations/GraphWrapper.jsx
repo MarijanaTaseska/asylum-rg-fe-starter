@@ -50,7 +50,7 @@ function GraphWrapper(props) {
         break;
     }
   }
-  function updateStateWithNewData(years, view, office, stateSettingCallback) {
+  async function updateStateWithNewData (years, view, office, stateSettingCallback) {
     /*
           _                                                                             _
         |                                                                                 |
@@ -72,33 +72,58 @@ function GraphWrapper(props) {
                                    -- Mack 
     
     */
-  const fiscalSummaryUrl = `${process.env.REACT_APP_API_URI}/fiscalSummary`;
-  const citizenshipSummaryUrl = `${process.env.REACT_APP_API_URI}/citizenshipSummary`;
-   const params ={
-    from: years[0],
-      to: years[1],
-      };
- if (office && office !== 'all') {
-  params.office = office;
-}
-axios.all([
-  axios.get(fiscalSummaryUrl, { params }), // Fetch fiscal summary data
-  axios.get(citizenshipSummaryUrl, { params }) // Fetch citizenship summary data
-])
-.then(axios.spread((fiscalResponse, citizenshipResponse) => {
-  const fiscalData = fiscalResponse.data;
-  const citizenshipData = citizenshipResponse.data;
+let citizenshipApi = `${process.env.REACT_APP_API_URI}/citizenshipSummary`;
+let fiscalSummaryAPI = `${process.env.REACT_APP_API_URI}/fiscalSummary`;
+try{
+    if (office === 'all' || !office) {
+     let citizenshipData = await axios
+        .get(citizenshipApi, {
+          // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
+          params: {
+            from: years[0],
+            to: years[1],
+          },
+        });
+        let fiscalData = await axios
+        .get(fiscalSummaryAPI, {
+          // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
+          params: {
+            from: years[0],
+            to: years[1],
+          },
+        });
 
-  // Convert yearResults to array if it exists
-  if (fiscalData && fiscalData.yearResults) {
-    fiscalData.yearResults = Object.values(fiscalData.yearResults);
-  }
-  stateSettingCallback(view, office, [fiscalData, citizenshipData]);
-}))
-.catch(err => {
-  console.error('Error fetching data:', err);
-});
-}
+fiscalData.data["citizenshipResults"]=citizenshipData.data;
+console.log("fiscalDatafrom Graph1", fiscalData.data);
+stateSettingCallback(view, office, [fiscalData.data]);
+    } else {
+      let citizenshipData = await axios
+        .get(citizenshipApi, {
+          // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
+          params: {
+            from: years[0],
+            to: years[1],
+            office:office,
+          },
+        });
+        let fiscalData = await axios
+        .get(fiscalSummaryAPI, {
+          // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
+          params: {
+            from: years[0],
+            to: years[1],
+            office:office,
+          },
+        });
+
+fiscalData.data["citizenshipResults"] = citizenshipData.data;
+console.log('fiscalDataGRaphwrapper',fiscalData);
+stateSettingCallback(view,office,[fiscalData.data]);
+    }
+  }catch(error){
+    console.error('Error fetching data: from Graphwrapper', error);
+    }
+  };
   const clearQuery = (view, office) => {
     dispatch(resetVisualizationQuery(view, office));
   };
@@ -136,45 +161,4 @@ axios.all([
     </div>
   );
 }
-
-// function moldData(fiscalData, citizenshipData) {
-//   // Modify this function according to how the data from both endpoints needs to be combined
-//   return {
-//     fiscalSummary: transformFiscalYearData(fiscalData),
-//     citizenshipSummary: transformCitizenshipData(citizenshipData),
-//   };
-// }
-// function transformFiscalYearData(apiData) {
-//   if (!apiData || !apiData.yearResults) {
-//     console.error("Fiscal year data is missing 'yearResults'");
-//     return [];
-//   }
-//   return apiData.yearResults.map(year => ({
-//     fiscal_year: year.fiscal_year,
-//     granted: year.granted,
-//     totalGranted: year.totalGranted,
-//     denied: year.denied,
-//     adminClosed: year.adminClosed,
-//     totalCases: year.totalCases,
-//     yearData: year.yearData.map(office => ({
-//       office: office.office,
-//       granted: office.granted,
-//       totalGranted: office.totalGranted,
-//       denied: office.denied,
-//       adminClosed: office.adminClosed,
-//       totalCases: office.totalCases
-//     }))
-//   }));
-// }
-// function transformCitizenshipData(apiData) {
-//   return apiData.map(country => ({
-//     citizenship: country.citizenship,
-//     granted: country.granted,
-//     totalGranted: country.totalGranted,
-//     denied: country.denied,
-//     adminClosed: country.adminClosed,
-//     totalCases: country.totalCases
-//   }));
-// }
-
 export default connect()(GraphWrapper);
