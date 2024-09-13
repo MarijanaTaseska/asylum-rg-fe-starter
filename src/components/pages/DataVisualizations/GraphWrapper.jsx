@@ -78,7 +78,6 @@ try{
     if (office === 'all' || !office) {
      let citizenshipData = await axios
         .get(citizenshipApi, {
-          // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
           params: {
             from: years[0],
             to: years[1],
@@ -86,7 +85,6 @@ try{
         });
         let fiscalData = await axios
         .get(fiscalSummaryAPI, {
-          // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
           params: {
             from: years[0],
             to: years[1],
@@ -99,7 +97,6 @@ stateSettingCallback(view, office, [fiscalData.data]);
     } else {
       let citizenshipData = await axios
         .get(citizenshipApi, {
-          // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
           params: {
             from: years[0],
             to: years[1],
@@ -108,7 +105,6 @@ stateSettingCallback(view, office, [fiscalData.data]);
         });
         let fiscalData = await axios
         .get(fiscalSummaryAPI, {
-          // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
           params: {
             from: years[0],
             to: years[1],
