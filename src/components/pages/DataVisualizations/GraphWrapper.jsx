@@ -92,7 +92,6 @@ try{
         });
 
 fiscalData.data["citizenshipResults"]=citizenshipData.data;
-console.log("fiscalDatafrom Graph1", fiscalData.data);
 stateSettingCallback(view, office, [fiscalData.data]);
     } else {
       let citizenshipData = await axios
@@ -113,11 +112,10 @@ stateSettingCallback(view, office, [fiscalData.data]);
         });
 
 fiscalData.data["citizenshipResults"] = citizenshipData.data;
-console.log('fiscalDataGRaphwrapper',fiscalData);
 stateSettingCallback(view,office,[fiscalData.data]);
     }
   }catch(error){
-    console.error('Error fetching data: from Graphwrapper', error);
+    console.error('Error fetching data:',error);
     }
   };
   const clearQuery = (view, office) => {
