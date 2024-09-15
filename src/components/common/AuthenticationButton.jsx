@@ -6,14 +6,17 @@ const AuthButton = () => {
     const buttonStyle = {
         background:'none',
         border: '2px solid #E2F0F7',
+        
         borderRadius: '5px', 
         color: '#e2f0f7',
-        padding: '10px 20px',
+        paddingLeft:"15px",
+        paddingRight:"15px",
+        height:"40px",
+        lineHeight: '40px',  
         cursor: 'pointer',
-        fontSize: '18px', // Match the font size of links
+        fontSize: '18px',
         textDecoration: 'none',
-        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)', // Shadow to lift the button
-        transition: 'all 0.3s ease', // Optionally mimic link styles
+        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)', 
       };
   return isAuthenticated ? (
 <button 

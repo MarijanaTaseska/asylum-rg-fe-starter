@@ -22,7 +22,8 @@ import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import reducer from './state/reducers';
 import { colors } from './styles/data_vis_colors';
-import { Auth0Provider } from '@auth0/auth0-react';
+import { Auth0Provider, useAuth0 } from '@auth0/auth0-react';
+import ProfilePage from './components/pages/Landing/ProfilePage';
 
 const { primary_accent_color } = colors;
 
@@ -47,6 +48,7 @@ ReactDOM.render(
 
 export function App() {
   const { Footer, Header } = Layout;
+  const {isAuthenticated} = useAuth0();
   return (
     <Layout>
       <Header
@@ -61,6 +63,7 @@ export function App() {
       </Header>
       <Switch>
         <Route path="/" exact component={LandingPage} />
+        {isAuthenticated && <Route path="/profile" component={ProfilePage} />}
         <Route path="/graphs" component={GraphsContainer} />
         <Route component={NotFoundPage} />
       </Switch>
