@@ -27,14 +27,14 @@ const styles = {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      height: '100vh', // Full viewport height
-      background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)', // Gradient background
+      height: '100vh',
+      background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)', 
       padding: '20px',
     },
     card: {
       backgroundColor: '#fff',
       borderRadius: '15px',
-      boxShadow: '0 8px 16px rgba(0, 0, 0, 0.1)', // Soft shadow for depth
+      boxShadow: '0 8px 16px rgba(0, 0, 0, 0.1)',
       padding: '40px',
       textAlign: 'center',
       maxWidth: '400px',
@@ -44,7 +44,7 @@ const styles = {
       borderRadius: '50%',
       width: '150px',
       height: '150px',
-      marginBottom: '20px', // Space between image and text
+      marginBottom: '20px',
     },
     welcomeText: {
       fontSize: '24px',
